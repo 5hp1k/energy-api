@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import List, Optional, Dict, Any
+from typing import Optional, Dict, Any
 from models import db, Company
 from repositories.base import BaseRepository
 from sqlalchemy import text

@@ -11,13 +11,7 @@ class EnergySupplyPointRepository(BaseRepository[EnergySupplyPoint]):
     def __init__(self):
         super().__init__(EnergySupplyPoint)
     
-    def create(
-        self, 
-        name: str, 
-        company_id: int, 
-        connection_date: str, 
-        max_power_kw: float
-    ) -> Optional[EnergySupplyPoint]:
+    def create(self, name: str, company_id: int, connection_date: str, max_power_kw: float) -> Optional[EnergySupplyPoint]:
         """Создать новую точку поставки"""
         # Проверка существования компании
         company = Company.query.get(company_id)
@@ -32,11 +26,7 @@ class EnergySupplyPointRepository(BaseRepository[EnergySupplyPoint]):
         )
         return self.add(point)
     
-    def update(
-        self, 
-        point: EnergySupplyPoint, 
-        data: Dict[str, Any]
-    ) -> Optional[EnergySupplyPoint]:
+    def update(self, point: EnergySupplyPoint, data: Dict[str, Any]) -> Optional[EnergySupplyPoint]:
         """Обновить точку поставки"""
         if 'name' in data:
             point.name = data['name']
@@ -55,11 +45,7 @@ class EnergySupplyPointRepository(BaseRepository[EnergySupplyPoint]):
         db.session.commit()
         return point
     
-    def search_by_date_range(
-        self, 
-        date_from: Optional[str], 
-        date_to: Optional[str]
-    ) -> List[Dict[str, Any]]:
+    def search_by_date_range(self, date_from: Optional[str], date_to: Optional[str]) -> List[Dict[str, Any]]:
         """Поиск точек поставки по дате через хранимую функцию"""
         result = db.session.execute(
             text('SELECT * FROM search_energy_supply_points(:date_from, :date_to)'),
@@ -78,12 +64,7 @@ class EnergySupplyPointRepository(BaseRepository[EnergySupplyPoint]):
             })
         return points
     
-    def rent_energy(
-        self, 
-        point_id: int, 
-        company_name: str, 
-        quantity_power: float
-    ) -> Dict[str, Any]:
+    def rent_energy(self, point_id: int, company_name: str, quantity_power: float) -> Dict[str, Any]:
         """Арендовать мощность через хранимую функцию"""
         result = db.session.execute(
             text('SELECT * FROM rent_energy(:point_id, :company_name, :quantity_power)'),

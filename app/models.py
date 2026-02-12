@@ -6,6 +6,7 @@ db = SQLAlchemy()
 
 
 class Company(db.Model):
+    """Модель компании-поставщика энергии"""
     __tablename__ = 'companies'
     
     id = db.Column(db.Integer, primary_key=True)
@@ -27,6 +28,7 @@ class Company(db.Model):
 
 
 class EnergySupplyPoint(db.Model):
+    """Модель точки поставки электроэнергии"""
     __tablename__ = 'energy_supply_points'
     
     id = db.Column(db.Integer, primary_key=True)
@@ -50,6 +52,7 @@ class EnergySupplyPoint(db.Model):
 
 
 class CompanyClient(db.Model):
+    """Модель клиента компании"""
     __tablename__ = 'company_clients'
     
     id = db.Column(db.Integer, primary_key=True)

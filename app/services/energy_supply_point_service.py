@@ -18,13 +18,7 @@ class EnergySupplyPointService:
         point = self.energy_point_repo.get_by_id(point_id)
         return self.energy_point_repo.to_dict(point) if point else None
     
-    def create_point(
-        self,
-        name: str,
-        company_id: int,
-        connection_date: str,
-        max_power_kw: float
-    ) -> Optional[Dict[str, Any]]:
+    def create_point(self, name: str, company_id: int, connection_date: str, max_power_kw: float) -> Optional[Dict[str, Any]]:
         """Создать новую точку поставки"""
         point = self.energy_point_repo.create(
             name, company_id, connection_date, max_power_kw
@@ -33,11 +27,7 @@ class EnergySupplyPointService:
             return None
         return self.energy_point_repo.to_dict(point)
     
-    def update_point(
-        self,
-        point_id: int,
-        data: Dict[str, Any]
-    ) -> Optional[Dict[str, Any]]:
+    def update_point(self, point_id: int, data: Dict[str, Any]) -> Optional[Dict[str, Any]]:
         """Обновить точку поставки"""
         point = self.energy_point_repo.get_by_id(point_id)
         if not point:
@@ -58,21 +48,10 @@ class EnergySupplyPointService:
         self.energy_point_repo.delete(point)
         return True
     
-    def search_points_by_date(
-        self,
-        date_from: Optional[str],
-        date_to: Optional[str]
-    ) -> List[Dict[str, Any]]:
+    def search_points_by_date(self, date_from: Optional[str], date_to: Optional[str]) -> List[Dict[str, Any]]:
         """Поиск точек поставки по дате"""
         return self.energy_point_repo.search_by_date_range(date_from, date_to)
     
-    def rent_energy(
-        self,
-        point_id: int,
-        company_name: str,
-        quantity_power: float
-    ) -> Dict[str, Any]:
+    def rent_energy(self, point_id: int, company_name: str, quantity_power: float) -> Dict[str, Any]:
         """Арендовать мощность"""
-        return self.energy_point_repo.rent_energy(
-            point_id, company_name, quantity_power
-        )
+        return self.energy_point_repo.rent_energy(point_id, company_name, quantity_power)

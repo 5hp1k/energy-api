@@ -18,21 +18,12 @@ class CompanyService:
         company = self.company_repo.get_by_id(company_id)
         return self.company_repo.to_dict(company) if company else None
     
-    def create_company(
-        self, 
-        name: str, 
-        registration_date: str, 
-        status: str
-    ) -> Dict[str, Any]:
+    def create_company(self, name: str, registration_date: str, status: str) -> Dict[str, Any]:
         """Создать новую компанию"""
         company = self.company_repo.create(name, registration_date, status)
         return self.company_repo.to_dict(company)
     
-    def update_company(
-        self, 
-        company_id: int, 
-        data: Dict[str, Any]
-    ) -> Optional[Dict[str, Any]]:
+    def update_company(self, company_id: int, data: Dict[str, Any]) -> Optional[Dict[str, Any]]:
         """Обновить компанию"""
         company = self.company_repo.get_by_id(company_id)
         if not company:
